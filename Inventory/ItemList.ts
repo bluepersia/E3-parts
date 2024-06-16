@@ -58,12 +58,12 @@ export default class ItemList implements IItemList
     countSpaceFor (item:IItem) : number
     {
         let counter = 0;
-        for (const inventoryItem of this._items)
+        for (const thisItem of this._items)
         {
-            if (inventoryItem === null)
+            if (thisItem === null)
                 counter += item.quantityMax;
-            else if (inventoryItem.id === item.id)
-                counter += inventoryItem.spaceLeft;
+            else if (thisItem.id === item.id)
+                counter += thisItem.spaceLeft;
         }
 
         return counter;

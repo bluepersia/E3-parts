@@ -25,7 +25,6 @@ export interface IItemList
 
     validate: (item:IItem|null, index:number) => boolean;
     forceSetItem: (index:number, item:IItem|null) => TransferType;
-    //onItemSet: (index:number, prev:IItem|null, curr:IItem|null) => void;
 
 }
 

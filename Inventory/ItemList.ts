@@ -150,9 +150,9 @@ export default class ItemList implements IItemList
         for (let i = 0; i < this._items.length; i++)
         {
             const thisItem = this._items[i];
-            
+
             if (thisItem === null || thisItem.id === item.id)
-                this.setItem (i, item);
+                this.validateAndSetItem (i, item);
 
             if (item.quantity <= 0)
                 break;

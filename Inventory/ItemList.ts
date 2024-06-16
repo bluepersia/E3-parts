@@ -101,7 +101,7 @@ export default class ItemList implements IItemList
                 this.innerSetItem (index, null);
                 return TransferType.Replaced;
             }
-            
+
             const inventoryItem = this._items[index];
     
             if (inventoryItem === null || inventoryItem.id !== item.id)
@@ -149,7 +149,10 @@ export default class ItemList implements IItemList
     {
         for (let i = 0; i < this._items.length; i++)
         {
-           this.setItem (i, item);
+            const thisItem = this._items[i];
+            
+            if (thisItem === null || thisItem.id === item.id)
+                this.setItem (i, item);
 
             if (item.quantity <= 0)
                 break;

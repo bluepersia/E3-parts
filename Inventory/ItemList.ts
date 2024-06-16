@@ -13,8 +13,8 @@ export interface IItemList
     items:(IItem|null)[];
     maxCount:number;
 
-    onItemSetEvent: ((target:IItemList, index:number) => void)[];
-    onQuantityChangedEvent: ((target:IItemList, index:number) => void)[];
+    onItemSetEvent: ((index:number) => void)[];
+    onQuantityChangedEvent: ((index:number) => void)[];
 
     countItem: (itemId:string) => number;
     countSpaceFor: (item:IItem) => number;
@@ -42,8 +42,8 @@ export default class ItemList implements IItemList
 
     maxCount:number = 10;
 
-    onItemSetEvent: ((target:IItemList, index: number) => void)[] = [];
-    onQuantityChangedEvent: ((target: IItemList, index: number) => void)[] = [];
+    onItemSetEvent: (( index: number) => void)[] = [];
+    onQuantityChangedEvent: ((index: number) => void)[] = [];
 
     constructor ()
     {
@@ -169,12 +169,12 @@ export default class ItemList implements IItemList
 
     protected onItemSet (index: number, prev: IItem | null, curr: IItem | null) : void
     {
-        this.onItemSetEvent.forEach (el => el (this, index));
+        this.onItemSetEvent.forEach (el => el (index));
     }
 
     protected onQuantityChanged (index:number) : void 
     {
-        this.onQuantityChangedEvent.forEach (el => el (this, index));
+        this.onQuantityChangedEvent.forEach (el => el (index));
     }
     
    

@@ -138,7 +138,7 @@ export default class ItemList implements IItemList
         if (this.validate (otherItem, index) && other.validate (thisItem, index))
         {
             //If item was replaced, we swap them out
-            if (this.setItem (index, otherItem) === TransferType.Replaced && thisItem)
+            if (this.setItem (index, otherItem) === TransferType.Replaced)
                 other.setItem (otherIndex, thisItem);
         }
     }

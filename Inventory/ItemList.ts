@@ -135,7 +135,7 @@ export default class ItemList implements IItemList
         const otherItem = other.items[otherIndex]!;
         const thisItem = this.items[index];
 
-        if (this.validate (otherItem, index) && other.validate (thisItem, index))
+        if (this.validate (otherItem, index) && other.validate (thisItem, otherIndex))
         {
             //If item was replaced, we swap them out
             if (this.setItem (index, otherItem) === TransferType.Replaced)

@@ -22,6 +22,7 @@ export interface IItemList
     setItem: (index:number, item:IItem|null) => TransferType;
     swapItems: (other:IItemList, otherIndex:number, index:number) => void;
     addItem: (item:IItem) => void;
+    removeItem: (itemId:string, count:number) => void;
 
     validate: (item:IItem|null, index:number) => boolean;
     forceSetItem: (index:number, item:IItem|null) => TransferType;
@@ -158,7 +159,23 @@ export default class ItemList implements IItemList
         }
     }
 
-   
+
+    removeItem (itemId:string, quantity:number) : void 
+    {
+        for (const item of this.items)
+        {
+            if (item === null || item.id !== itemId)
+                continue;
+
+            if (item.quantity >= quantity)
+            {
+                item.quantity -= quantity;
+                break;
+            }
+            quantity -= item.quantity;
+            item.quantity = 0;
+        }
+    }
 
 
     public validate (item: IItem|null, index: number) : boolean

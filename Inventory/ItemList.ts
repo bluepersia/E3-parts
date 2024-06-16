@@ -24,7 +24,7 @@ export interface IItemList
     addItem: (item:IItem) => void;
 
     validate: (item:IItem|null, index:number) => boolean;
-    validateAndSetItem: (index:number, item:IItem|null) => TransferType;
+    forceSetItem: (index:number, item:IItem|null) => TransferType;
     //onItemSet: (index:number, prev:IItem|null, curr:IItem|null) => void;
 
 }
@@ -94,7 +94,7 @@ export default class ItemList implements IItemList
         this.onItemSet (index, prev, item);
     }
 
-    public setItem (index:number, item:IItem|null) : TransferType
+    public forceSetItem (index:number, item:IItem|null) : TransferType
     {
         if (item === null)
             {
@@ -122,12 +122,12 @@ export default class ItemList implements IItemList
             return TransferType.None;
     }
 
-    validateAndSetItem (index:number, item:IItem|null) : TransferType 
+    setItem (index:number, item:IItem|null) : TransferType 
     {
         if (!this.validate (item, index))
             return TransferType.None;
 
-        return this.setItem (index, item);
+        return this.forceSetItem (index, item);
     }
 
     swapItems (other: IItemList, otherIndex: number, index: number) : void
@@ -152,7 +152,7 @@ export default class ItemList implements IItemList
             const thisItem = this._items[i];
 
             if (thisItem === null || thisItem.id === item.id)
-                this.validateAndSetItem (i, item);
+                this.setItem (i, item);
 
             if (item.quantity <= 0)
                 break;
